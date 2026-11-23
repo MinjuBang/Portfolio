@@ -22,12 +22,10 @@
   <meta property="og:image" content="TODO: 대표 썸네일 이미지 URL 입력 필요 (권장 1200x630)" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Pinned Korean & Monospace Webfonts (CDN) -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <!-- Pinned Korean & Monospace Webfonts (CDN): Jua, Gowun Dodum, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=JetBrains+Mono:wght@400;500&family=Jua&display=swap" />
 
   <!-- Pinned Graph Visualization Library: vis-network v9.1.9 (CDN) -->
   <script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js" defer></script>
@@ -35,56 +33,55 @@
   <style>
     /* =====================================================================
        디자인 토큰 (:root CSS 변수)
-       - 레퍼런스 및 학술 기획서 톤을 반영한 에디토리얼 모노그래프 팔레트
-       - 색상·폰트·간격을 여기서 한 번에 수정할 수 있습니다.
+       - 레퍼런스 기반 바다·섬 팔레트 및 타이포그래피
+       - 그라데이션·유리 효과·이모지 미사용, 명암 대비 4.5:1 이상 준수
        ===================================================================== */
     :root {
-      /* 60% Neutral Canvas */
-      --color-bg: #FAF9F6;
-      /* 30% Structural Surfaces */
+      /* Palette */
+      --color-bg: #F2FBF8;
+      --color-sea: #BDE7E1;
+      --color-wave-mid: #9EDBD2;
+      --color-wave-deep: #7CCBC0;
+      --color-card-shadow: #9FD5CC;
+
       --color-surface: #FFFFFF;
-      --color-surface-alt: #F2EFE9;
-      --color-surface-subtle: #F7F5F0;
-      /* Ink & Typography */
-      --color-ink: #18181B;
-      --color-ink-secondary: #3F3F46;
-      --color-ink-muted: #64646E;
-      /* 10% Accent (Deep Editorial Burgundy + Slate Cobalt) */
-      --color-accent: #7F1D3A;
-      --color-accent-hover: #64152D;
-      --color-accent-soft: rgba(127, 29, 58, 0.08);
-      /* Hairline Borders & Shadows */
-      --color-border: rgba(24, 24, 27, 0.12);
-      --color-border-strong: rgba(24, 24, 27, 0.22);
-      --shadow-card: 0 1px 3px rgba(24, 24, 27, 0.04), 0 6px 18px rgba(24, 24, 27, 0.03);
-      --shadow-modal: 0 20px 50px rgba(24, 24, 27, 0.18);
+      --color-ink: #1F3B4D;
+      --color-ink-muted: #4A6272;
 
-      /* Semantic / Placeholder Highlight */
-      --color-todo-bg: #FEF3C7;
-      --color-todo-ink: #92400E;
-      --color-todo-border: rgba(146, 64, 14, 0.25);
+      --color-coral: #FFB4A2;
+      --color-coral-shadow: #D98470;
+      --color-navy-shadow: #102330;
+      --color-sand: #FFE9D6;
+      --color-sun: #FFE6A6;
 
-      /* Graph Node Colors by Neo4j Label (accessible contrast) */
-      --node-character: #1D4ED8;
-      --node-event: #7C3AED;
-      --node-place: #B45309;
-      --node-object: #0F766E;
-      --node-cultural: #BE123C;
-      --node-default: #475569;
+      --color-border: #9EDBD2;
+      --color-border-soft: #C7EAE4;
+      --shadow-card: 0 6px 0 var(--color-card-shadow);
+      --shadow-card-sea: 0 6px 0 var(--color-wave-deep);
+      --shadow-btn-primary: 0 4px 0 var(--color-navy-shadow);
+      --shadow-btn-coral: 0 4px 0 var(--color-coral-shadow);
+      --shadow-btn-neutral: 0 4px 0 var(--color-card-shadow);
+
+      /* Graph Node Colors (Palette-aligned) */
+      --node-character: #FFB4A2;
+      --node-event: #1F3B4D;
+      --node-place: #7CCBC0;
+      --node-object: #FFE6A6;
+      --node-cultural: #FFE9D6;
 
       /* Typography */
-      --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-      --font-serif: "Noto Serif KR", Georgia, serif;
+      --font-display: "Jua", "Apple SD Gothic Neo", sans-serif;
+      --font-body: "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-      /* Layout & Motion */
-      --container-max: 1180px;
-      --header-height: 64px;
-      --radius-sm: 6px;
-      --radius-md: 10px;
-      --radius-lg: 14px;
+      /* Layout & Radii */
+      --container-max: 1160px;
+      --header-height: 76px;
+      --radius-card: 28px;
+      --radius-btn: 18px;
+      --radius-pill: 9999px;
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-      --transition-fast: 160ms var(--ease-out);
+      --transition-fast: 150ms var(--ease-out);
     }
 
     *, *::before, *::after {
@@ -100,14 +97,19 @@
       margin: 0;
       background-color: var(--color-bg);
       color: var(--color-ink);
-      font-family: var(--font-sans);
-      font-size: 15.5px;
-      line-height: 1.65;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      color: var(--color-ink);
     }
 
     a {
@@ -120,7 +122,7 @@
     }
 
     :focus-visible {
-      outline: 2px solid var(--color-accent);
+      outline: 3px solid var(--color-ink);
       outline-offset: 2px;
     }
 
@@ -141,17 +143,15 @@
     }
 
     /* =====================================================================
-       공통 헤더 (3-Zone Top Bar)
+       공통 헤더 (왼쪽 코랄 조개 홈 버튼 + 오른쪽 흰색 알약 내비 바)
        ===================================================================== */
     .site-header {
       position: sticky;
       top: 0;
       z-index: 40;
       height: var(--header-height);
-      background: rgba(250, 249, 246, 0.92);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--color-border);
+      background-color: var(--color-bg);
+      border-bottom: 2px solid var(--color-sea);
     }
 
     .header-inner {
@@ -162,96 +162,82 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 20px;
     }
 
     .brand-link {
-      font-family: var(--font-serif);
-      font-size: 1.08rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      font-family: var(--font-display);
+      font-size: 1.25rem;
       color: var(--color-ink);
       white-space: nowrap;
       flex-shrink: 0;
-      padding: 6px 2px;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      transition: color var(--transition-fast);
-    }
-
-    .brand-link:hover {
-      color: var(--color-accent);
-    }
-
-    .brand-monogram {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border-radius: var(--radius-sm);
-      background: var(--color-ink);
-      color: var(--color-bg);
-      font-family: var(--font-sans);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .nav-desktop {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .nav-link {
-      position: relative;
-      font-size: 0.94rem;
-      font-weight: 500;
-      color: var(--color-ink-muted);
-      padding: 8px 2px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: color var(--transition-fast);
-    }
-
-    .nav-link::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 2px;
-      height: 2px;
-      background: var(--color-accent);
-      transform: scaleX(0);
-      transform-origin: center;
+      gap: 10px;
+      padding: 4px 6px 4px 2px;
+      border-radius: var(--radius-pill);
       transition: transform var(--transition-fast);
     }
 
-    .nav-link:hover {
+    .brand-link:hover {
+      transform: translateY(-1px);
+    }
+
+    .brand-shell-circle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-pill);
+      background-color: var(--color-coral);
+      border: 2px solid var(--color-ink);
+      box-shadow: 0 3px 0 var(--color-coral-shadow);
+      flex-shrink: 0;
+    }
+
+    .nav-pill-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      padding: 5px;
+      box-shadow: 0 4px 0 var(--color-card-shadow);
+    }
+
+    .nav-link {
+      font-family: var(--font-display);
+      font-size: 0.98rem;
       color: var(--color-ink);
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      background-color: var(--color-sand);
     }
 
     .nav-link[aria-current="page"] {
-      color: var(--color-ink);
-      font-weight: 600;
-    }
-
-    .nav-link[aria-current="page"]::after {
-      transform: scaleX(1);
+      background-color: var(--color-ink);
+      color: #FFFFFF;
     }
 
     .menu-toggle {
       display: none;
       align-items: center;
       justify-content: center;
-      width: 44px;
+      width: 46px;
       height: 44px;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-sm);
-      background: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-btn);
+      background-color: var(--color-surface);
       color: var(--color-ink);
+      box-shadow: var(--shadow-btn-neutral);
       cursor: pointer;
     }
 
@@ -261,39 +247,35 @@
       top: var(--header-height);
       left: 0;
       right: 0;
-      background: var(--color-surface);
-      border-bottom: 1px solid var(--color-border-strong);
-      padding: 12px 24px 20px;
+      background-color: var(--color-surface);
+      border-bottom: 2px solid var(--color-border);
+      padding: 14px 20px 20px;
       z-index: 39;
-      box-shadow: var(--shadow-modal);
+      box-shadow: 0 6px 0 var(--color-card-shadow);
     }
 
     .nav-mobile.is-open {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 8px;
     }
 
     .nav-mobile .nav-link {
       display: block;
-      padding: 12px 4px;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .nav-mobile .nav-link:last-child {
-      border-bottom: none;
-    }
-
-    .nav-mobile .nav-link::after {
-      display: none;
+      text-align: center;
+      padding: 12px 16px;
+      border: 2px solid var(--color-border-soft);
+      background-color: var(--color-bg);
     }
 
     .nav-mobile .nav-link[aria-current="page"] {
-      color: var(--color-accent);
+      background-color: var(--color-ink);
+      border-color: var(--color-ink);
+      color: #FFFFFF;
     }
 
     /* =====================================================================
-       메인 컨테이너 & 페이지 전환
+       메인 & 밴드(물결 구분) 구조
        ===================================================================== */
     main {
       flex: 1;
@@ -303,7 +285,30 @@
     .container {
       max-width: var(--container-max);
       margin: 0 auto;
-      padding: 40px 24px 72px;
+      padding: 0 24px;
+    }
+
+    .band-mint {
+      background-color: var(--color-bg);
+      padding: 36px 0 44px;
+    }
+
+    .band-sea {
+      background-color: var(--color-sea);
+      padding: 40px 0 48px;
+    }
+
+    .wave-divider {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .wave-divider svg {
+      display: block;
+      width: 100%;
+      height: 54px;
     }
 
     .page-view {
@@ -328,7 +333,7 @@
     .reveal {
       opacity: 1;
       transform: none;
-      transition: opacity 380ms var(--ease-out), transform 380ms var(--ease-out);
+      transition: opacity 360ms var(--ease-out), transform 360ms var(--ease-out);
     }
 
     .reveal.will-animate {
@@ -342,34 +347,44 @@
     }
 
     /* =====================================================================
-       공통 타이포그래피, 버튼, 메타데이터, TODO 자리표시자
+       공통 UI 컴포넌트: 카드, 버튼, 태그·칩, 장식 SVG
        ===================================================================== */
     .section-block {
-      padding: 44px 0;
-      border-top: 1px solid var(--color-border);
+      padding: 16px 0 40px;
+    }
+
+    .section-block + .section-block {
+      margin-top: 20px;
+      padding-top: 36px;
+      border-top: 2px dashed var(--color-wave-deep);
     }
 
     .section-header {
       display: flex;
       flex-wrap: wrap;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
       gap: 12px;
       margin-bottom: 24px;
     }
 
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .section-title {
       margin: 0;
-      font-family: var(--font-serif);
-      font-size: clamp(1.3rem, 2.2vw, 1.65rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      font-family: var(--font-display);
+      font-size: clamp(1.45rem, 2.5vw, 1.9rem);
+      letter-spacing: -0.01em;
       color: var(--color-ink);
     }
 
     .section-subtitle {
-      margin: 0;
-      font-size: 0.9rem;
+      margin: 4px 0 0;
+      font-size: 0.94rem;
       color: var(--color-ink-muted);
     }
 
@@ -378,76 +393,128 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 8px;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--color-ink-muted);
     }
 
     .meta-sep {
-      color: var(--color-border-strong);
+      color: var(--color-wave-deep);
       user-select: none;
+      font-weight: 700;
     }
 
+    /* 18px 모서리 + 아래 단색 눌림 그림자 버튼 */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      min-height: 42px;
-      padding: 10px 20px;
-      border-radius: var(--radius-sm);
-      font-size: 0.92rem;
-      font-weight: 600;
+      min-height: 44px;
+      padding: 10px 22px;
+      border-radius: var(--radius-btn);
+      font-family: var(--font-display);
+      font-size: 1rem;
       white-space: nowrap;
       flex-shrink: 0;
       cursor: pointer;
-      border: 1px solid transparent;
-      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
-    }
-
-    .btn:active {
-      transform: translateY(1px);
+      border: 2px solid var(--color-ink);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
     }
 
     .btn-primary {
-      background: var(--color-accent);
+      background-color: var(--color-ink);
       color: #FFFFFF;
+      border-color: var(--color-ink);
+      box-shadow: var(--shadow-btn-primary);
     }
 
     .btn-primary:hover {
-      background: var(--color-accent-hover);
+      transform: translateY(1px);
+      box-shadow: 0 3px 0 var(--color-navy-shadow);
+    }
+
+    .btn-primary:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--color-navy-shadow);
     }
 
     .btn-secondary {
-      background: var(--color-surface);
+      background-color: var(--color-coral);
       color: var(--color-ink);
-      border-color: var(--color-border-strong);
+      border-color: var(--color-ink);
+      box-shadow: var(--shadow-btn-coral);
     }
 
     .btn-secondary:hover {
-      background: var(--color-surface-alt);
+      transform: translateY(1px);
+      box-shadow: 0 3px 0 var(--color-coral-shadow);
+    }
+
+    .btn-secondary:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--color-coral-shadow);
     }
 
     .btn-ghost {
-      background: transparent;
-      color: var(--color-ink-secondary);
-      border-color: var(--color-border);
-      min-height: 36px;
-      padding: 6px 12px;
-      font-size: 0.84rem;
+      background-color: var(--color-surface);
+      color: var(--color-ink);
+      border: 2px solid var(--color-border);
+      box-shadow: var(--shadow-btn-neutral);
+      min-height: 40px;
+      padding: 7px 15px;
+      font-size: 0.92rem;
     }
 
     .btn-ghost:hover {
-      background: var(--color-surface-alt);
+      background-color: var(--color-sand);
+      transform: translateY(1px);
+      box-shadow: 0 3px 0 var(--color-card-shadow);
+    }
+
+    .btn-ghost:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--color-card-shadow);
+    }
+
+    /* 알약 태그·칩 (연한 배경 + 2px 테두리) */
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      background-color: var(--color-sand);
+      border: 2px solid var(--color-wave-mid);
       color: var(--color-ink);
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+
+    .tag-chip-sun {
+      background-color: var(--color-sun);
+      border-color: var(--color-coral);
+    }
+
+    .tag-chip-mint {
+      background-color: var(--color-bg);
+      border-color: var(--color-wave-deep);
     }
 
     .todo-marker {
       display: inline-block;
-      padding: 1px 6px;
-      border-radius: 4px;
-      background: var(--color-todo-bg);
-      color: var(--color-todo-ink);
-      border: 1px dashed var(--color-todo-border);
+      padding: 2px 10px;
+      border-radius: var(--radius-pill);
+      background-color: var(--color-sun);
+      color: var(--color-ink);
+      border: 2px solid var(--color-coral);
       font-family: var(--font-mono);
       font-size: 0.82em;
       font-weight: 500;
@@ -458,10 +525,10 @@
        ===================================================================== */
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
-      gap: 40px;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
+      gap: 28px;
       align-items: stretch;
-      padding: 12px 0 44px;
+      padding-bottom: 32px;
     }
 
     .hero-main {
@@ -470,87 +537,108 @@
       justify-content: center;
     }
 
-    .hero-kicker {
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--color-accent);
-      margin-bottom: 12px;
+    .hero-kicker-chip {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background-color: var(--color-sun);
+      border: 2px solid var(--color-wave-mid);
+      color: var(--color-ink);
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
     }
 
     .hero-title {
-      margin: 0 0 14px;
-      font-family: var(--font-serif);
-      font-size: clamp(1.95rem, 3.8vw, 2.9rem);
-      line-height: 1.22;
-      letter-spacing: -0.03em;
+      margin: 0 0 12px;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.24;
       text-wrap: balance;
       color: var(--color-ink);
     }
 
     .hero-tagline {
-      margin: 0 0 18px;
-      font-size: 1.12rem;
-      font-weight: 600;
-      color: var(--color-ink-secondary);
+      margin: 0 0 14px;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--color-ink-muted);
     }
 
     .hero-bio {
-      margin: 0 0 28px;
-      max-width: 64ch;
-      color: var(--color-ink-secondary);
-      line-height: 1.72;
+      margin: 0 0 26px;
+      max-width: 62ch;
+      color: var(--color-ink);
+      font-size: 1rem;
+      line-height: 1.75;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .hero-aside-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
+      background-color: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-card);
       padding: 24px;
       box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 20px;
+      gap: 18px;
+    }
+
+    .island-illustration-box {
+      background-color: var(--color-bg);
+      border: 2px solid var(--color-border);
+      border-radius: 20px;
+      padding: 10px 14px 0;
+      overflow: hidden;
+    }
+
+    .island-illustration-box svg {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
     .proposal-dl {
       margin: 0;
       display: grid;
-      grid-template-columns: 96px minmax(0, 1fr);
-      gap: 10px 14px;
-      font-size: 0.9rem;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 8px 12px;
+      font-size: 0.92rem;
     }
 
     .proposal-dl dt {
       color: var(--color-ink-muted);
-      font-weight: 500;
+      font-family: var(--font-display);
     }
 
     .proposal-dl dd {
       margin: 0;
       color: var(--color-ink);
-      font-weight: 500;
       word-break: keep-all;
     }
 
     .wiki-links-box {
-      padding-top: 16px;
-      border-top: 1px solid var(--color-border);
+      padding-top: 14px;
+      border-top: 2px dashed var(--color-border);
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
     .wiki-links-label {
-      font-size: 0.82rem;
-      font-weight: 600;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
       color: var(--color-ink-muted);
     }
 
@@ -559,36 +647,35 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      padding: 8px 12px;
-      border-radius: var(--radius-sm);
-      background: var(--color-surface-subtle);
-      border: 1px solid var(--color-border);
-      font-size: 0.88rem;
-      font-weight: 500;
+      padding: 9px 14px;
+      border-radius: var(--radius-btn);
+      background-color: var(--color-sand);
+      border: 2px solid var(--color-border);
+      font-size: 0.9rem;
+      font-weight: 600;
       color: var(--color-ink);
-      transition: border-color var(--transition-fast), background-color var(--transition-fast);
+      transition: transform var(--transition-fast), background-color var(--transition-fast);
     }
 
     .external-link-row:hover {
-      border-color: var(--color-accent);
-      background: var(--color-surface);
-      color: var(--color-accent);
+      background-color: var(--color-sun);
+      transform: translateY(-1px);
     }
 
-    /* Key Metrics Strip */
+    /* Key Metrics Strip (White Card with 28px & #9FD5CC Shadow) */
     .summary-strip {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      background: var(--color-surface);
-      margin-bottom: 8px;
+      background-color: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
       overflow: hidden;
     }
 
     .summary-cell {
-      padding: 18px 20px;
-      border-right: 1px solid var(--color-border);
+      padding: 20px 22px;
+      border-right: 2px solid var(--color-border-soft);
     }
 
     .summary-cell:last-child {
@@ -596,44 +683,48 @@
     }
 
     .summary-value {
-      font-family: var(--font-serif);
+      font-family: var(--font-display);
       font-size: 1.55rem;
-      font-weight: 700;
       color: var(--color-ink);
-      line-height: 1.2;
+      line-height: 1.25;
       margin-bottom: 4px;
     }
 
     .summary-label {
-      font-size: 0.84rem;
+      font-size: 0.86rem;
       color: var(--color-ink-muted);
     }
 
-    /* Skills Grid */
-    .skills-grid {
+    /* Skills & Team Grid */
+    .skills-grid,
+    .team-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
+      gap: 22px;
     }
 
-    .skill-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: 22px;
+    .team-grid {
+      margin-top: 22px;
+    }
+
+    .skill-card,
+    .team-card {
+      background-color: var(--color-surface);
+      border: 2px solid var(--color-wave-mid);
+      border-radius: var(--radius-card);
+      padding: 24px;
       box-shadow: var(--shadow-card);
     }
 
     .skill-category {
       margin: 0 0 8px;
-      font-size: 1rem;
-      font-weight: 700;
+      font-size: 1.12rem;
       color: var(--color-ink);
     }
 
     .skill-desc {
       margin: 0 0 14px;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       color: var(--color-ink-muted);
     }
 
@@ -641,14 +732,14 @@
       margin: 0;
       padding: 0;
       list-style: none;
-      border-top: 1px solid var(--color-border);
+      border-top: 2px dashed var(--color-border-soft);
     }
 
     .skill-items li {
-      padding: 8px 0;
-      font-size: 0.9rem;
-      color: var(--color-ink-secondary);
-      border-bottom: 1px solid var(--color-border);
+      padding: 9px 0;
+      font-size: 0.92rem;
+      color: var(--color-ink);
+      border-bottom: 1px solid var(--color-border-soft);
     }
 
     .skill-items li:last-child {
@@ -656,81 +747,67 @@
       padding-bottom: 0;
     }
 
-    /* Team Members Strip */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .team-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: 20px;
-    }
-
     .team-name {
-      margin: 0 0 4px;
-      font-size: 1.05rem;
-      font-weight: 700;
+      margin: 0 0 6px;
+      font-size: 1.15rem;
     }
 
     .team-dept {
-      font-size: 0.85rem;
-      color: var(--color-accent);
-      font-weight: 500;
+      display: inline-block;
       margin-bottom: 10px;
     }
 
     .team-role {
       margin: 0;
-      font-size: 0.9rem;
-      color: var(--color-ink-secondary);
+      font-size: 0.92rem;
+      color: var(--color-ink-muted);
     }
 
-    /* Timeline */
+    /* Timeline (Cards inside Sea Band) */
     .timeline-list {
       margin: 0;
       padding: 0;
       list-style: none;
-      border-top: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
     .timeline-item {
       display: grid;
-      grid-template-columns: 190px minmax(0, 1fr);
-      gap: 16px 28px;
-      padding: 22px 0;
-      border-bottom: 1px solid var(--color-border);
+      grid-template-columns: 205px minmax(0, 1fr);
+      gap: 14px 24px;
+      padding: 22px 24px;
+      background-color: var(--color-surface);
+      border: 2px solid var(--color-wave-mid);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
     }
 
     .timeline-period {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--color-accent);
+      font-family: var(--font-display);
+      font-size: 0.98rem;
+      color: var(--color-ink);
       font-variant-numeric: tabular-nums;
+      margin-bottom: 6px;
     }
 
     .timeline-org {
-      margin-top: 4px;
-      font-size: 0.86rem;
+      font-size: 0.88rem;
       color: var(--color-ink-muted);
     }
 
     .timeline-role {
       margin: 0 0 8px;
-      font-size: 1.05rem;
-      font-weight: 700;
+      font-size: 1.12rem;
       color: var(--color-ink);
     }
 
     .timeline-highlights {
       margin: 0;
       padding-left: 18px;
-      color: var(--color-ink-secondary);
-      font-size: 0.93rem;
+      color: var(--color-ink-muted);
+      font-size: 0.94rem;
     }
 
     .timeline-highlights li + li {
@@ -741,14 +818,15 @@
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+      gap: 20px;
     }
 
     .contact-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: 20px;
+      background-color: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-card);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -756,14 +834,14 @@
     }
 
     .contact-label {
-      font-size: 0.82rem;
-      font-weight: 600;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
       color: var(--color-ink-muted);
       margin-bottom: 4px;
     }
 
     .contact-value {
-      font-size: 0.95rem;
+      font-size: 0.96rem;
       font-weight: 600;
       color: var(--color-ink);
       word-break: break-all;
@@ -786,38 +864,40 @@
       justify-content: space-between;
       gap: 16px;
       margin-bottom: 28px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--color-border);
+      padding: 16px 20px;
+      background-color: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
     }
 
     .filter-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 8px;
     }
 
     .filter-btn {
-      min-height: 38px;
-      padding: 6px 14px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--color-border);
-      background: var(--color-surface);
-      color: var(--color-ink-secondary);
-      font-size: 0.86rem;
-      font-weight: 500;
+      min-height: 40px;
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      border: 2px solid var(--color-border);
+      background-color: var(--color-bg);
+      color: var(--color-ink);
+      font-family: var(--font-display);
+      font-size: 0.9rem;
       cursor: pointer;
       white-space: nowrap;
-      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+      transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
     }
 
     .filter-btn:hover {
-      background: var(--color-surface-alt);
-      color: var(--color-ink);
+      background-color: var(--color-sand);
     }
 
     .filter-btn[aria-pressed="true"] {
-      background: var(--color-ink);
-      color: var(--color-bg);
+      background-color: var(--color-ink);
+      color: #FFFFFF;
       border-color: var(--color-ink);
     }
 
@@ -829,24 +909,23 @@
 
     .search-input {
       width: 100%;
-      min-height: 40px;
-      padding: 8px 14px 8px 36px;
-      border: 1px solid var(--color-border-strong);
-      border-radius: var(--radius-sm);
-      background: var(--color-surface);
+      min-height: 42px;
+      padding: 8px 14px 8px 38px;
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      background-color: var(--color-bg);
       color: var(--color-ink);
-      font-size: 0.9rem;
+      font-size: 0.94rem;
     }
 
     .search-input:focus {
-      outline: 2px solid var(--color-accent);
+      outline: 2px solid var(--color-ink);
       outline-offset: 1px;
-      border-color: var(--color-accent);
     }
 
     .search-icon {
       position: absolute;
-      left: 11px;
+      left: 13px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--color-ink-muted);
@@ -860,9 +939,9 @@
     }
 
     .project-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
+      background-color: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-card);
       overflow: hidden;
       box-shadow: var(--shadow-card);
       display: flex;
@@ -871,46 +950,71 @@
       text-align: left;
       padding: 0;
       width: 100%;
-      transition: transform var(--transition-fast), border-color var(--transition-fast);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
     }
 
     .project-card:hover {
       transform: translateY(-2px);
-      border-color: var(--color-border-strong);
+      box-shadow: 0 8px 0 var(--color-card-shadow);
+    }
+
+    .project-card:active {
+      transform: translateY(2px);
+      box-shadow: 0 4px 0 var(--color-card-shadow);
     }
 
     .project-thumb {
       width: 100%;
-      aspect-ratio: 16 / 9;
-      background: var(--color-surface-alt);
-      border-bottom: 1px solid var(--color-border);
+      aspect-ratio: 16 / 8.5;
+      background-color: var(--color-sand);
+      border-bottom: 2px solid var(--color-border);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 20px 22px;
+      padding: 20px 24px;
       position: relative;
       overflow: hidden;
     }
 
-    .project-thumb-pattern {
-      background-image: radial-gradient(rgba(24, 24, 27, 0.1) 1px, transparent 1px);
-      background-size: 16px 16px;
+    .project-thumb-sea {
+      background-color: var(--color-sea);
+    }
+
+    .project-thumb-sun {
+      background-color: var(--color-sun);
+    }
+
+    .project-thumb-coral {
+      background-color: var(--color-coral);
+    }
+
+    .project-thumb-deco {
+      position: absolute;
+      right: 18px;
+      bottom: 12px;
+      pointer-events: none;
     }
 
     .project-thumb-index {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--color-accent);
-      font-weight: 500;
+      display: inline-block;
+      align-self: flex-start;
+      padding: 3px 12px;
+      border-radius: var(--radius-pill);
+      background-color: var(--color-surface);
+      border: 2px solid var(--color-ink);
+      font-family: var(--font-display);
+      font-size: 0.84rem;
+      color: var(--color-ink);
     }
 
     .project-thumb-caption {
-      font-family: var(--font-serif);
-      font-size: 1.05rem;
-      font-weight: 700;
+      font-family: var(--font-display);
+      font-size: 1.12rem;
       color: var(--color-ink);
-      max-width: 28ch;
-      line-height: 1.4;
+      max-width: 24ch;
+      line-height: 1.38;
+      position: relative;
+      z-index: 1;
     }
 
     .project-thumb img {
@@ -922,47 +1026,51 @@
     }
 
     .project-body {
-      padding: 22px;
+      padding: 22px 24px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       flex: 1;
     }
 
     .project-title {
       margin: 0;
-      font-size: 1.15rem;
-      font-weight: 700;
+      font-size: 1.18rem;
       color: var(--color-ink);
       line-height: 1.38;
     }
 
     .project-summary {
       margin: 0;
-      font-size: 0.92rem;
-      color: var(--color-ink-secondary);
-      line-height: 1.6;
+      font-size: 0.94rem;
+      color: var(--color-ink-muted);
+      line-height: 1.65;
     }
 
     .project-footer-meta {
       margin-top: auto;
       padding-top: 12px;
-      border-top: 1px solid var(--color-border);
+      border-top: 2px dashed var(--color-border-soft);
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      font-size: 0.83rem;
-      color: var(--color-ink-muted);
+      gap: 10px;
+    }
+
+    .project-more-label {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      color: var(--color-ink);
     }
 
     .empty-state {
       padding: 48px 24px;
       text-align: center;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
+      background-color: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
       color: var(--color-ink-muted);
     }
 
@@ -971,7 +1079,7 @@
       position: fixed;
       inset: 0;
       z-index: 60;
-      background: rgba(24, 24, 27, 0.56);
+      background-color: rgba(31, 59, 77, 0.58);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -983,10 +1091,10 @@
     }
 
     .modal-dialog {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border-strong);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-modal);
+      background-color: var(--color-surface);
+      border: 2px solid var(--color-ink);
+      border-radius: var(--radius-card);
+      box-shadow: 0 8px 0 var(--color-card-shadow);
       width: 100%;
       max-width: 760px;
       max-height: 88vh;
@@ -997,7 +1105,8 @@
 
     .modal-header {
       padding: 20px 24px;
-      border-bottom: 1px solid var(--color-border);
+      background-color: var(--color-bg);
+      border-bottom: 2px solid var(--color-border);
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
@@ -1005,27 +1114,29 @@
     }
 
     .modal-title {
-      margin: 4px 0 0;
-      font-family: var(--font-serif);
-      font-size: 1.35rem;
+      margin: 8px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.38rem;
       line-height: 1.35;
       color: var(--color-ink);
     }
 
     .modal-close {
-      min-width: 40px;
-      min-height: 40px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--color-border);
-      background: var(--color-surface);
+      min-width: 42px;
+      min-height: 42px;
+      border-radius: var(--radius-btn);
+      border: 2px solid var(--color-border);
+      background-color: var(--color-surface);
       color: var(--color-ink);
-      font-size: 1.15rem;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      box-shadow: 0 3px 0 var(--color-card-shadow);
       cursor: pointer;
       flex-shrink: 0;
     }
 
     .modal-close:hover {
-      background: var(--color-surface-alt);
+      background-color: var(--color-coral);
     }
 
     .modal-body {
@@ -1038,34 +1149,34 @@
 
     .modal-section-heading {
       margin: 0 0 6px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--color-accent);
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--color-ink);
     }
 
     .modal-section-text {
       margin: 0;
-      color: var(--color-ink-secondary);
-      line-height: 1.7;
+      color: var(--color-ink-muted);
+      line-height: 1.72;
       white-space: pre-line;
     }
 
     .cypher-box {
       margin: 8px 0 0;
       padding: 14px 16px;
-      background: #18181B;
-      color: #F4F4F5;
-      border-radius: var(--radius-sm);
+      background-color: var(--color-ink);
+      color: #F2FBF8;
+      border-radius: var(--radius-btn);
       font-family: var(--font-mono);
-      font-size: 0.82rem;
+      font-size: 0.83rem;
       line-height: 1.55;
       overflow-x: auto;
     }
 
     .modal-footer {
       padding: 16px 24px;
-      border-top: 1px solid var(--color-border);
-      background: var(--color-surface-subtle);
+      border-top: 2px solid var(--color-border);
+      background-color: var(--color-bg);
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -1083,23 +1194,24 @@
       justify-content: space-between;
       gap: 16px;
       margin-bottom: 18px;
-      padding: 14px 18px;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
+      padding: 16px 22px;
+      background-color: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
     }
 
     .explore-stats {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 18px;
-      font-size: 0.92rem;
+      gap: 14px;
+      font-size: 0.94rem;
     }
 
     .explore-stat-item strong {
-      font-family: var(--font-mono);
-      font-size: 1.05rem;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
       color: var(--color-ink);
     }
 
@@ -1116,59 +1228,63 @@
       align-items: center;
       gap: 8px;
       flex: 1 1 260px;
-      max-width: 380px;
+      max-width: 400px;
     }
 
     .label-filter-bar {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 12px;
-      padding: 10px 14px;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      margin-bottom: 16px;
+      gap: 10px;
+      padding: 12px 18px;
+      background-color: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 20px;
     }
 
     .legend-checkbox {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      font-size: 0.86rem;
-      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      border: 2px solid var(--color-border);
+      background-color: var(--color-bg);
+      font-family: var(--font-display);
+      font-size: 0.88rem;
       color: var(--color-ink);
       cursor: pointer;
       user-select: none;
-      padding: 4px 6px;
-      border-radius: 4px;
     }
 
     .legend-checkbox:hover {
-      background: var(--color-surface-alt);
+      background-color: var(--color-sand);
     }
 
     .legend-swatch {
-      width: 12px;
-      height: 12px;
-      border-radius: 3px;
+      width: 13px;
+      height: 13px;
+      border-radius: var(--radius-pill);
+      border: 2px solid var(--color-ink);
       flex-shrink: 0;
     }
 
     .explore-workspace {
       display: grid;
       grid-template-columns: minmax(0, 1.65fr) minmax(300px, 0.95fr);
-      gap: 20px;
+      gap: 22px;
       align-items: stretch;
     }
 
     .graph-stage {
       position: relative;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      min-height: 580px;
-      height: 620px;
+      background-color: var(--color-bg);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-card);
+      min-height: 560px;
+      height: 600px;
       overflow: hidden;
       box-shadow: var(--shadow-card);
     }
@@ -1176,93 +1292,95 @@
     #network-canvas {
       width: 100%;
       height: 100%;
+      background-color: var(--color-bg);
     }
 
     .graph-toolbar-overlay {
       position: absolute;
-      right: 14px;
-      bottom: 14px;
+      right: 16px;
+      bottom: 16px;
       z-index: 5;
       display: flex;
       gap: 6px;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(6px);
-      padding: 5px;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-sm);
+      background-color: var(--color-surface);
+      padding: 6px;
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-btn);
+      box-shadow: var(--shadow-btn-neutral);
     }
 
     .graph-tool-btn {
-      min-width: 36px;
+      min-width: 38px;
       min-height: 36px;
-      padding: 0 10px;
-      border: 1px solid transparent;
-      border-radius: 4px;
-      background: transparent;
+      padding: 0 11px;
+      border: 2px solid transparent;
+      border-radius: 12px;
+      background-color: var(--color-bg);
       color: var(--color-ink);
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-family: var(--font-display);
+      font-size: 0.88rem;
       cursor: pointer;
     }
 
     .graph-tool-btn:hover {
-      background: var(--color-surface-alt);
+      background-color: var(--color-sand);
+      border-color: var(--color-border);
     }
 
     .graph-fallback {
-      padding: 28px;
+      padding: 24px;
       height: 100%;
       overflow-y: auto;
+      background-color: var(--color-bg);
     }
 
     .graph-fallback-alert {
-      padding: 14px 16px;
-      border-radius: var(--radius-sm);
-      background: var(--color-todo-bg);
-      color: var(--color-todo-ink);
-      border: 1px solid var(--color-todo-border);
+      padding: 16px 18px;
+      border-radius: var(--radius-btn);
+      background-color: var(--color-sun);
+      color: var(--color-ink);
+      border: 2px solid var(--color-coral);
       margin-bottom: 18px;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
     }
 
     .inspector-panel {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: 20px;
+      background-color: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 22px;
       box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
       gap: 16px;
-      max-height: 620px;
+      max-height: 600px;
       overflow-y: auto;
     }
 
     .inspector-title {
       margin: 0;
-      font-family: var(--font-serif);
-      font-size: 1.2rem;
+      font-family: var(--font-display);
+      font-size: 1.28rem;
       color: var(--color-ink);
     }
 
     .props-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.87rem;
+      font-size: 0.9rem;
     }
 
     .props-table th,
     .props-table td {
       text-align: left;
-      padding: 8px 10px;
-      border-bottom: 1px solid var(--color-border);
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--color-border-soft);
       vertical-align: top;
     }
 
     .props-table th {
       width: 34%;
       color: var(--color-ink-muted);
-      font-weight: 600;
       font-family: var(--font-mono);
       font-size: 0.8rem;
     }
@@ -1278,28 +1396,28 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
     }
 
     .neighbor-btn {
       width: 100%;
       text-align: left;
-      padding: 8px 10px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--color-border);
-      background: var(--color-surface-subtle);
+      padding: 9px 12px;
+      border-radius: var(--radius-btn);
+      border: 2px solid var(--color-border);
+      background-color: var(--color-bg);
       color: var(--color-ink);
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
+      transition: background-color var(--transition-fast);
     }
 
     .neighbor-btn:hover {
-      border-color: var(--color-accent);
-      background: var(--color-surface);
+      background-color: var(--color-sand);
     }
 
     .neighbor-rel {
@@ -1312,11 +1430,10 @@
        푸터 & 토스트
        ===================================================================== */
     .site-footer {
-      border-top: 1px solid var(--color-border);
-      background: var(--color-surface-subtle);
-      padding: 24px;
-      font-size: 0.85rem;
-      color: var(--color-ink-muted);
+      background-color: var(--color-sea);
+      padding: 26px 24px 32px;
+      font-size: 0.9rem;
+      color: var(--color-ink);
     }
 
     .footer-inner {
@@ -1334,13 +1451,14 @@
       bottom: 24px;
       right: 24px;
       z-index: 80;
-      padding: 11px 18px;
-      border-radius: var(--radius-sm);
-      background: var(--color-ink);
+      padding: 12px 20px;
+      border-radius: var(--radius-pill);
+      background-color: var(--color-ink);
       color: #FFFFFF;
-      font-size: 0.88rem;
-      font-weight: 500;
-      box-shadow: var(--shadow-modal);
+      border: 2px solid var(--color-wave-mid);
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      box-shadow: 0 4px 0 var(--color-navy-shadow);
       opacity: 0;
       transform: translateY(8px);
       pointer-events: none;
@@ -1371,7 +1489,7 @@
 
       .summary-cell:nth-child(1),
       .summary-cell:nth-child(2) {
-        border-bottom: 1px solid var(--color-border);
+        border-bottom: 2px solid var(--color-border-soft);
       }
 
       .skills-grid,
@@ -1386,8 +1504,8 @@
       }
 
       .graph-stage {
-        min-height: 400px;
-        height: 420px;
+        min-height: 380px;
+        height: 400px;
       }
 
       .inspector-panel {
@@ -1395,8 +1513,8 @@
       }
     }
 
-    @media (max-width: 720px) {
-      .nav-desktop {
+    @media (max-width: 760px) {
+      .nav-pill-bar {
         display: none;
       }
 
@@ -1405,16 +1523,41 @@
       }
 
       .container {
-        padding: 28px 16px 56px;
+        padding: 0 16px;
       }
 
       .header-inner {
         padding: 0 16px;
       }
 
+      .band-mint {
+        padding: 24px 0 32px;
+      }
+
+      .band-sea {
+        padding: 28px 0 36px;
+      }
+
+      .wave-divider svg {
+        height: 36px;
+      }
+
+      .summary-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-cell {
+        border-right: none;
+        border-bottom: 2px solid var(--color-border-soft);
+      }
+
+      .summary-cell:last-child {
+        border-bottom: none;
+      }
+
       .timeline-item {
         grid-template-columns: 1fr;
-        gap: 6px;
+        gap: 8px;
       }
 
       .contact-card {
@@ -1444,18 +1587,24 @@
   <header class="site-header">
     <div class="header-inner">
       <a href="#about" id="home-logo" class="brand-link" aria-label="홈으로 이동">
-        <span class="brand-monogram" aria-hidden="true">A+</span>
+        <span class="brand-shell-circle" aria-hidden="true">
+          <!-- 단순 조개 도형 SVG -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 4C6.5 4 3 8.2 3 13C3 15.8 5.2 18 8 18.5L9.2 20H14.8L16 18.5C18.8 18 21 15.8 21 13C21 8.2 17.5 4 12 4Z" fill="#FFE9D6" stroke="#1F3B4D" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M12 4V19M8.2 5.2L10.5 19M15.8 5.2L13.5 19" stroke="#1F3B4D" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </span>
         <span id="brand-name-text">A+토벌단</span>
       </a>
 
-      <nav class="nav-desktop" aria-label="주요 메뉴">
+      <nav class="nav-pill-bar" aria-label="주요 메뉴">
         <a href="#about" class="nav-link" data-route="about">자기소개</a>
         <a href="#projects" class="nav-link" data-route="projects">프로젝트</a>
         <a href="#explore" class="nav-link" data-route="explore">데이터 탐색</a>
       </nav>
 
       <button type="button" id="mobile-menu-btn" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="메뉴 열기">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
           <line x1="4" y1="7" x2="20" y2="7" />
           <line x1="4" y1="12" x2="20" y2="12" />
           <line x1="4" y1="17" x2="20" y2="17" />
@@ -1475,34 +1624,59 @@
          1) 자기소개 페이지 (#about)
          ================================================================ -->
     <section id="view-about" class="page-view" aria-labelledby="about-hero-title">
-      <div class="container" id="about-root"></div>
+      <div id="about-root"></div>
     </section>
 
     <!-- ================================================================
          2) 프로젝트 페이지 (#projects)
          ================================================================ -->
     <section id="view-projects" class="page-view" aria-labelledby="projects-heading" hidden>
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <h1 id="projects-heading" class="section-title">프로젝트 &amp; 연구 산출물</h1>
-            <p class="section-subtitle">카드를 선택하면 연구 배경, 수행 내용, Cypher 질의 결과를 확인할 수 있습니다.</p>
+      <div class="band-mint">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <circle cx="16" cy="16" r="13" fill="#FFE6A6" stroke="#1F3B4D" stroke-width="2"/>
+                <path d="M16 7L18.4 12.6L24.5 13.2L19.9 17.2L21.3 23.2L16 20L10.7 23.2L12.1 17.2L7.5 13.2L13.6 12.6L16 7Z" fill="#FFB4A2" stroke="#1F3B4D" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+              <div>
+                <h1 id="projects-heading" class="section-title">프로젝트 &amp; 연구 산출물</h1>
+                <p class="section-subtitle">카드를 선택하면 연구 배경, 수행 내용, Cypher 질의 결과를 확인할 수 있습니다.</p>
+              </div>
+            </div>
+            <div id="projects-count-meta" class="tag-chip tag-chip-mint tabular-nums"></div>
           </div>
-          <div id="projects-count-meta" class="meta-line tabular-nums"></div>
-        </div>
 
-        <div class="projects-toolbar">
-          <div id="project-tag-filters" class="filter-group" role="group" aria-label="기술 태그 필터"></div>
-          <div class="search-box">
-            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input type="search" id="project-search-input" class="search-input" placeholder="프로젝트 제목, 키워드 검색..." aria-label="프로젝트 검색" />
+          <div class="projects-toolbar">
+            <div id="project-tag-filters" class="filter-group" role="group" aria-label="기술 태그 필터"></div>
+            <div class="search-box">
+              <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="search" id="project-search-input" class="search-input" placeholder="프로젝트 제목, 키워드 검색..." aria-label="프로젝트 검색" />
+            </div>
           </div>
         </div>
+      </div>
 
-        <div id="projects-grid" class="projects-grid"></div>
+      <div class="wave-divider" style="background-color: var(--color-bg);" aria-hidden="true">
+        <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+          <path d="M0,26 C240,56 480,4 720,26 C960,48 1200,8 1440,28 L1440,60 L0,60 Z" fill="#9EDBD2"/>
+          <path d="M0,38 C280,12 520,58 840,34 C1100,14 1280,46 1440,36 L1440,60 L0,60 Z" fill="#BDE7E1"/>
+        </svg>
+      </div>
+
+      <div class="band-sea">
+        <div class="container">
+          <div id="projects-grid" class="projects-grid"></div>
+        </div>
+      </div>
+
+      <div class="wave-divider" style="background-color: var(--color-sea);" aria-hidden="true">
+        <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+          <path d="M0,24 C320,54 640,4 960,30 C1180,46 1320,16 1440,26 L1440,60 L0,60 Z" fill="#F2FBF8"/>
+        </svg>
       </div>
     </section>
 
@@ -1510,60 +1684,79 @@
          3) 데이터 탐색 페이지 (#explore)
          ================================================================ -->
     <section id="view-explore" class="page-view" aria-labelledby="explore-heading" hidden>
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <h1 id="explore-heading" class="section-title">지식그래프 데이터 탐색</h1>
-            <p class="section-subtitle">노드를 클릭하면 속성과 연결된 이웃 개체를 확인하고, 관계망을 직접 탐색할 수 있습니다.</p>
-          </div>
-        </div>
-
-        <div class="explore-summary-bar">
-          <div class="explore-stats tabular-nums">
-            <span class="explore-stat-item">전체 노드 <strong id="stat-total-nodes">0</strong></span>
-            <span class="meta-sep" aria-hidden="true">·</span>
-            <span class="explore-stat-item">전체 관계 <strong id="stat-total-edges">0</strong></span>
-            <span class="meta-sep" aria-hidden="true">·</span>
-            <span class="explore-stat-item">표시 중 <strong id="stat-visible-nodes">0</strong> 노드 / <strong id="stat-visible-edges">0</strong> 관계</span>
-          </div>
-          <div class="meta-line">
-            <span>드래그로 이동 · 휠로 확대/축소 · 노드 클릭으로 상세 조회</span>
-          </div>
-        </div>
-
-        <div class="explore-controls">
-          <div class="graph-search-wrap">
-            <div class="search-box" style="max-width:none;">
-              <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      <div class="band-mint">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <path d="M16 4C16 4 8 13.2 8 19C8 23.4 11.6 27 16 27C20.4 27 24 23.4 24 19C24 13.2 16 4 16 4Z" fill="#7CCBC0" stroke="#1F3B4D" stroke-width="2" stroke-linejoin="round"/>
+                <circle cx="13.5" cy="18.5" r="2" fill="#FFFFFF"/>
               </svg>
-              <input type="search" id="graph-search-input" class="search-input" placeholder="노드 이름 검색 (예: 치이카와, 인어살해, 인어설화)..." aria-label="노드 검색" />
+              <div>
+                <h1 id="explore-heading" class="section-title">지식그래프 데이터 탐색</h1>
+                <p class="section-subtitle">노드를 클릭하면 속성과 연결된 이웃 개체를 확인하고, 관계망을 직접 탐색할 수 있습니다.</p>
+              </div>
             </div>
-            <button type="button" id="graph-search-btn" class="btn btn-secondary" style="min-height:40px; padding:6px 14px;">포커스</button>
           </div>
 
-          <button type="button" id="graph-reset-focus-btn" class="btn btn-ghost">강조 해제</button>
-          <button type="button" id="graph-fit-btn" class="btn btn-ghost">화면 맞춤</button>
+          <div class="explore-summary-bar">
+            <div class="explore-stats tabular-nums">
+              <span class="explore-stat-item">전체 노드 <strong id="stat-total-nodes">0</strong></span>
+              <span class="meta-sep" aria-hidden="true">·</span>
+              <span class="explore-stat-item">전체 관계 <strong id="stat-total-edges">0</strong></span>
+              <span class="meta-sep" aria-hidden="true">·</span>
+              <span class="explore-stat-item">표시 중 <strong id="stat-visible-nodes">0</strong> 노드 / <strong id="stat-visible-edges">0</strong> 관계</span>
+            </div>
+            <div class="meta-line">
+              <span>드래그 이동 · 휠 확대/축소 · 노드 클릭 상세 조회</span>
+            </div>
+          </div>
+
+          <div class="explore-controls">
+            <div class="graph-search-wrap">
+              <div class="search-box" style="max-width:none;">
+                <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="search" id="graph-search-input" class="search-input" placeholder="노드 이름 검색 (예: 치이카와, 인어살해, 인어설화)..." aria-label="노드 검색" />
+              </div>
+              <button type="button" id="graph-search-btn" class="btn btn-secondary" style="min-height:42px; padding:6px 16px;">포커스</button>
+            </div>
+
+            <button type="button" id="graph-reset-focus-btn" class="btn btn-ghost">강조 해제</button>
+            <button type="button" id="graph-fit-btn" class="btn btn-ghost">화면 맞춤</button>
+          </div>
+
+          <div id="graph-legend-bar" class="label-filter-bar" role="group" aria-label="레이블별 표시 필터 및 범례"></div>
         </div>
+      </div>
 
-        <div id="graph-legend-bar" class="label-filter-bar" role="group" aria-label="레이블별 표시 필터 및 범례"></div>
+      <div class="wave-divider" style="background-color: var(--color-bg);" aria-hidden="true">
+        <svg viewBox="0 0 1440 56" preserveAspectRatio="none">
+          <path d="M0,22 C280,52 560,6 840,28 C1100,48 1280,12 1440,24 L1440,56 L0,56 Z" fill="#9EDBD2"/>
+          <path d="M0,36 C320,10 640,52 960,30 C1180,14 1320,42 1440,34 L1440,56 L0,56 Z" fill="#BDE7E1"/>
+        </svg>
+      </div>
 
-        <div class="explore-workspace">
-          <div class="graph-stage">
-            <div id="network-canvas" aria-label="Neo4j 지식그래프 네트워크 시각화"></div>
-            <div id="graph-fallback" class="graph-fallback" hidden></div>
-            <div class="graph-toolbar-overlay" id="graph-zoom-toolbar">
-              <button type="button" id="zoom-in-btn" class="graph-tool-btn" aria-label="확대">+</button>
-              <button type="button" id="zoom-out-btn" class="graph-tool-btn" aria-label="축소">-</button>
-              <button type="button" id="zoom-fit-btn" class="graph-tool-btn" aria-label="화면에 맞추기">맞춤</button>
+      <div class="band-sea">
+        <div class="container">
+          <div class="explore-workspace">
+            <div class="graph-stage">
+              <div id="network-canvas" aria-label="Neo4j 지식그래프 네트워크 시각화"></div>
+              <div id="graph-fallback" class="graph-fallback" hidden></div>
+              <div class="graph-toolbar-overlay" id="graph-zoom-toolbar">
+                <button type="button" id="zoom-in-btn" class="graph-tool-btn" aria-label="확대">+</button>
+                <button type="button" id="zoom-out-btn" class="graph-tool-btn" aria-label="축소">-</button>
+                <button type="button" id="zoom-fit-btn" class="graph-tool-btn" aria-label="화면에 맞추기">맞춤</button>
+              </div>
             </div>
-          </div>
 
-          <aside id="node-inspector" class="inspector-panel" aria-live="polite">
-            <h2 class="inspector-title">노드 상세 정보</h2>
-            <p class="section-subtitle">그래프에서 노드를 선택하거나 검색하면 레이블, 속성 표, 연결된 이웃 노드가 여기에 표시됩니다.</p>
-          </aside>
+            <aside id="node-inspector" class="inspector-panel" aria-live="polite">
+              <h2 class="inspector-title">노드 상세 정보</h2>
+              <p class="section-subtitle">그래프에서 노드를 선택하거나 검색하면 레이블, 속성 표, 연결된 이웃 노드가 여기에 표시됩니다.</p>
+            </aside>
+          </div>
         </div>
       </div>
     </section>
@@ -1582,6 +1775,14 @@
       <div id="modal-project-body" class="modal-body"></div>
       <div id="modal-project-footer" class="modal-footer"></div>
     </div>
+  </div>
+
+  <!-- 푸터 상단 물결 경계 -->
+  <div class="wave-divider" style="background-color: var(--color-bg);" aria-hidden="true">
+    <svg viewBox="0 0 1440 52" preserveAspectRatio="none">
+      <path d="M0,24 C260,48 520,6 780,26 C1040,46 1260,10 1440,26 L1440,52 L0,52 Z" fill="#7CCBC0"/>
+      <path d="M0,34 C300,12 600,48 920,30 C1160,16 1320,40 1440,32 L1440,52 L0,52 Z" fill="#BDE7E1"/>
+    </svg>
   </div>
 
   <!-- 푸터 -->
@@ -2255,18 +2456,27 @@
       var graphData = normalizeNeo4jData(rawGraph);
 
       var LABEL_COLORS = {
-        Character: '#1D4ED8',
-        Event: '#7C3AED',
-        Place: '#B45309',
-        Object: '#0F766E',
-        CulturalElement: '#BE123C'
+        Character: '#FFB4A2',
+        Event: '#1F3B4D',
+        Place: '#7CCBC0',
+        Object: '#FFE6A6',
+        CulturalElement: '#FFE9D6'
       };
-      var FALLBACK_PALETTE = ['#2563EB', '#9333EA', '#D97706', '#0D9488', '#E11D48', '#4F46E5'];
+      var FALLBACK_PALETTE = ['#FFB4A2', '#1F3B4D', '#7CCBC0', '#FFE6A6', '#FFE9D6', '#9EDBD2'];
 
       function getLabelColor(label, index) {
         if (LABEL_COLORS[label]) return LABEL_COLORS[label];
         return FALLBACK_PALETTE[(index || 0) % FALLBACK_PALETTE.length];
       }
+
+      /* 단순 도형 SVG 아이콘 헬퍼 */
+      var SVG_ICONS = {
+        sun: '<svg width="26" height="26" viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="14" r="7" fill="#FFE6A6" stroke="#1F3B4D" stroke-width="2"/><path d="M14 2V5M14 23V26M2 14H5M23 14H26M5.5 5.5L7.6 7.6M20.4 20.4L22.5 22.5M22.5 5.5L20.4 7.6M7.6 20.4L5.5 22.5" stroke="#1F3B4D" stroke-width="2" stroke-linecap="round"/></svg>',
+        starfish: '<svg width="26" height="26" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 3L16.9 9.8L24.2 10.5L18.7 15.3L20.3 22.5L14 18.7L7.7 22.5L9.3 15.3L3.8 10.5L11.1 9.8L14 3Z" fill="#FFB4A2" stroke="#1F3B4D" stroke-width="2" stroke-linejoin="round"/></svg>',
+        droplet: '<svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 3C14 3 7 11.5 7 16.5C7 20.6 10.1 24 14 24C17.9 24 21 20.6 21 16.5C21 11.5 14 3 14 3Z" fill="#7CCBC0" stroke="#1F3B4D" stroke-width="2" stroke-linejoin="round"/></svg>',
+        shell: '<svg width="26" height="26" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 5C7.8 5 4 9.6 4 15C4 18 6.4 20.4 9.5 21L10.8 23H17.2L18.5 21C21.6 20.4 24 18 24 15C24 9.6 20.2 5 14 5Z" fill="#FFE9D6" stroke="#1F3B4D" stroke-width="2" stroke-linejoin="round"/><path d="M14 5V21.5M9.5 6.5L12 21.5M18.5 6.5L16 21.5" stroke="#1F3B4D" stroke-width="1.6" stroke-linecap="round"/></svg>',
+        islandScene: '<svg viewBox="0 0 360 120" fill="none" aria-hidden="true"><circle cx="295" cy="34" r="18" fill="#FFE6A6" stroke="#1F3B4D" stroke-width="2.2"/><path d="M295 8V12M295 56V60M269 34H273M317 34H321M276 15L279 18M311 50L314 53M314 15L311 18M279 50L276 53" stroke="#1F3B4D" stroke-width="2" stroke-linecap="round"/><path d="M48 34C48 34 42 42 42 46C42 49.3 44.7 52 48 52C51.3 52 54 49.3 54 46C54 42 48 34 48 34Z" fill="#7CCBC0" stroke="#1F3B4D" stroke-width="2"/><path d="M88 94C108 54 152 46 184 62C212 76 236 68 258 94H88Z" fill="#FFE9D6" stroke="#1F3B4D" stroke-width="2.2" stroke-linejoin="round"/><path d="M150 60V34" stroke="#1F3B4D" stroke-width="2.4" stroke-linecap="round"/><path d="M150 36C136 30 124 34 118 44C130 42 140 42 150 36Z" fill="#7CCBC0" stroke="#1F3B4D" stroke-width="2" stroke-linejoin="round"/><path d="M150 36C164 28 178 32 184 42C172 40 162 40 150 36Z" fill="#9EDBD2" stroke="#1F3B4D" stroke-width="2" stroke-linejoin="round"/><path d="M214 78L216.6 83.2L222.4 83.9L218 87.8L219.2 93.4L214 90.6L208.8 93.4L210 87.8L205.6 83.9L211.4 83.2L214 78Z" fill="#FFB4A2" stroke="#1F3B4D" stroke-width="1.8" stroke-linejoin="round"/><path d="M0 94C60 84 120 104 180 94C240 84 300 104 360 94V120H0V94Z" fill="#9EDBD2"/><path d="M0 104C70 96 140 112 210 102C270 94 320 108 360 102V120H0V104Z" fill="#BDE7E1"/></svg>'
+      };
 
       /* =====================================================================
          4. 자기소개 페이지 (#about) 렌더링
@@ -2308,7 +2518,7 @@
           return (
             '<article class="team-card">' +
               '<h3 class="team-name">' + escapeHtml(m.name) + '</h3>' +
-              '<div class="team-dept">' + escapeHtml(m.department) + '</div>' +
+              '<div class="tag-chip tag-chip-sun team-dept">' + escapeHtml(m.department) + '</div>' +
               '<p class="team-role">' + escapeHtml(m.responsibilities) + '</p>' +
             '</article>'
           );
@@ -2337,113 +2547,152 @@
         var githubIsTodo = !contacts.github || isTodoValue(contacts.github);
 
         root.innerHTML =
-          '<div class="hero-grid">' +
-            '<div class="hero-main">' +
-              '<div class="hero-kicker">' + escapeHtml(info.course || '포트폴리오') + '</div>' +
-              '<h1 id="about-hero-title" class="hero-title">' + escapeHtml(p.name) + '</h1>' +
-              '<p class="hero-tagline">' + escapeHtml(p.headline) + '</p>' +
-              '<p class="hero-bio">' + escapeHtml(p.bio) + '</p>' +
-              '<div class="hero-actions">' +
-                '<a href="#projects" class="btn btn-primary">프로젝트 보기</a>' +
-                '<button type="button" id="scroll-to-contact-btn" class="btn btn-secondary">연락하기</button>' +
+          '<div class="band-mint">' +
+            '<div class="container">' +
+              '<div class="hero-grid">' +
+                '<div class="hero-main">' +
+                  '<div class="hero-kicker-chip">' + SVG_ICONS.sun + '<span>' + escapeHtml(info.course || '포트폴리오') + '</span></div>' +
+                  '<h1 id="about-hero-title" class="hero-title">' + escapeHtml(p.name) + '</h1>' +
+                  '<p class="hero-tagline">' + escapeHtml(p.headline) + '</p>' +
+                  '<p class="hero-bio">' + escapeHtml(p.bio) + '</p>' +
+                  '<div class="hero-actions">' +
+                    '<a href="#projects" class="btn btn-primary">프로젝트 보기</a>' +
+                    '<button type="button" id="scroll-to-contact-btn" class="btn btn-secondary">연락하기</button>' +
+                  '</div>' +
+                '</div>' +
+                '<aside class="hero-aside-card" aria-label="프로젝트 개요 및 참고 링크">' +
+                  '<div class="island-illustration-box">' + SVG_ICONS.islandScene + '</div>' +
+                  '<dl class="proposal-dl">' +
+                    '<dt>프로젝트명</dt><dd>' + escapeHtml(info.projectTitle || '') + '</dd>' +
+                    '<dt>문서번호</dt><dd class="tabular-nums">' + escapeHtml(info.docNumber || '') + '</dd>' +
+                    '<dt>추진 기간</dt><dd>' + escapeHtml(info.period || '') + '</dd>' +
+                    '<dt>최종 산출물</dt><dd>' + escapeHtml(info.deliverables || '') + '</dd>' +
+                    '<dt>발표자료</dt><dd>' + renderValueOrTodo(info.presentationUrl) + '</dd>' +
+                  '</dl>' +
+                  '<div class="wiki-links-box">' +
+                    '<span class="wiki-links-label">더 알아보기 (원천 자료 위키 &amp; 영화 정보)</span>' +
+                    wikiHtml +
+                  '</div>' +
+                '</aside>' +
+              '</div>' +
+
+              '<div class="summary-strip tabular-nums" aria-label="지식그래프 규모 요약">' +
+                '<div class="summary-cell">' +
+                  '<div class="summary-value">' + graphData.labels.length + '개 클래스</div>' +
+                  '<div class="summary-label">Character · Event · Place · Object · CulturalElement</div>' +
+                '</div>' +
+                '<div class="summary-cell">' +
+                  '<div class="summary-value">' + graphData.nodes.length + '개 노드</div>' +
+                  '<div class="summary-label">영화 본편 기반 개체 정규화</div>' +
+                '</div>' +
+                '<div class="summary-cell">' +
+                  '<div class="summary-value">' + graphData.edges.length + '개 관계</div>' +
+                  '<div class="summary-label">검증된 서사·문화·관계 엣지</div>' +
+                '</div>' +
+                '<div class="summary-cell">' +
+                  '<div class="summary-value">18개 질의</div>' +
+                  '<div class="summary-label">Q1–Q18 Cypher 인문학적 해석</div>' +
+                '</div>' +
               '</div>' +
             '</div>' +
-            '<aside class="hero-aside-card" aria-label="프로젝트 개요 및 참고 링크">' +
-              '<dl class="proposal-dl">' +
-                '<dt>프로젝트명</dt><dd>' + escapeHtml(info.projectTitle || '') + '</dd>' +
-                '<dt>문서번호</dt><dd class="tabular-nums">' + escapeHtml(info.docNumber || '') + '</dd>' +
-                '<dt>추진 기간</dt><dd>' + escapeHtml(info.period || '') + '</dd>' +
-                '<dt>최종 산출물</dt><dd>' + escapeHtml(info.deliverables || '') + '</dd>' +
-                '<dt>발표자료</dt><dd>' + renderValueOrTodo(info.presentationUrl) + '</dd>' +
-              '</dl>' +
-              '<div class="wiki-links-box">' +
-                '<span class="wiki-links-label">더 알아보기 (원천 자료 위키 &amp; 영화 정보)</span>' +
-                wikiHtml +
-              '</div>' +
-            '</aside>' +
           '</div>' +
 
-          '<div class="summary-strip tabular-nums" aria-label="지식그래프 규모 요약">' +
-            '<div class="summary-cell">' +
-              '<div class="summary-value">' + graphData.labels.length + '개 클래스</div>' +
-              '<div class="summary-label">Character · Event · Place · Object · CulturalElement</div>' +
-            '</div>' +
-            '<div class="summary-cell">' +
-              '<div class="summary-value">' + graphData.nodes.length + '개 노드</div>' +
-              '<div class="summary-label">영화 본편 기반 개체 정규화</div>' +
-            '</div>' +
-            '<div class="summary-cell">' +
-              '<div class="summary-value">' + graphData.edges.length + '개 관계</div>' +
-              '<div class="summary-label">검증된 서사·문화·관계 엣지</div>' +
-            '</div>' +
-            '<div class="summary-cell">' +
-              '<div class="summary-value">18개 질의</div>' +
-              '<div class="summary-label">Q1–Q18 Cypher 인문학적 해석</div>' +
+          '<div class="wave-divider" style="background-color: var(--color-bg);" aria-hidden="true">' +
+            '<svg viewBox="0 0 1440 60" preserveAspectRatio="none">' +
+              '<path d="M0,24 C260,54 520,6 780,28 C1040,50 1260,10 1440,26 L1440,60 L0,60 Z" fill="#9EDBD2"/>' +
+              '<path d="M0,38 C300,12 600,56 900,32 C1160,12 1320,44 1440,34 L1440,60 L0,60 Z" fill="#BDE7E1"/>' +
+            '</svg>' +
+          '</div>' +
+
+          '<div class="band-sea">' +
+            '<div class="container">' +
+              '<section class="section-block reveal" aria-labelledby="skills-heading">' +
+                '<div class="section-header">' +
+                  '<div class="section-title-wrap">' + SVG_ICONS.starfish +
+                    '<div>' +
+                      '<h2 id="skills-heading" class="section-title">핵심 역량 및 분석 방법론</h2>' +
+                      '<p class="section-subtitle">데이터 모델링부터 Cypher 검증 및 시각화까지</p>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="skills-grid">' + skillsHtml + '</div>' +
+                (teamHtml ? '<div class="team-grid" aria-label="팀 구성 및 역할">' + teamHtml + '</div>' : '') +
+              '</section>' +
+
+              '<section class="section-block reveal" aria-labelledby="timeline-heading">' +
+                '<div class="section-header">' +
+                  '<div class="section-title-wrap">' + SVG_ICONS.droplet +
+                    '<div>' +
+                      '<h2 id="timeline-heading" class="section-title">경력 · 추진 이력 타임라인</h2>' +
+                      '<p class="section-subtitle">최신순 정리 · portfolio-data 수정 시 자동 반영</p>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>' +
+                '<ul class="timeline-list">' + expHtml + '</ul>' +
+              '</section>' +
             '</div>' +
           '</div>' +
 
-          '<section class="section-block reveal" aria-labelledby="skills-heading">' +
-            '<div class="section-header">' +
-              '<h2 id="skills-heading" class="section-title">핵심 역량 및 분석 방법론</h2>' +
-              '<p class="section-subtitle">데이터 모델링부터 Cypher 검증 및 시각화까지</p>' +
+          '<div class="wave-divider" style="background-color: var(--color-sea);" aria-hidden="true">' +
+            '<svg viewBox="0 0 1440 58" preserveAspectRatio="none">' +
+              '<path d="M0,22 C280,52 580,8 880,30 C1140,48 1300,14 1440,26 L1440,58 L0,58 Z" fill="#7CCBC0"/>' +
+              '<path d="M0,34 C320,10 620,52 940,32 C1180,18 1320,42 1440,34 L1440,58 L0,58 Z" fill="#F2FBF8"/>' +
+            '</svg>' +
+          '</div>' +
+
+          '<div class="band-mint">' +
+            '<div class="container">' +
+              '<section id="contact-section" class="section-block reveal" aria-labelledby="contact-heading" style="padding-bottom:12px;">' +
+                '<div class="section-header">' +
+                  '<div class="section-title-wrap">' + SVG_ICONS.shell +
+                    '<div>' +
+                      '<h2 id="contact-heading" class="section-title">연락 방법</h2>' +
+                      '<p class="section-subtitle">협업 및 프로젝트 관련 문의 채널</p>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="contact-grid">' +
+                  '<div class="contact-card">' +
+                    '<div>' +
+                      '<div class="contact-label">이메일 (Email)</div>' +
+                      '<div class="contact-value">' + renderValueOrTodo(contacts.email) + '</div>' +
+                    '</div>' +
+                    '<div class="contact-actions">' +
+                      (emailIsTodo ? '' : '<a class="btn btn-ghost" href="mailto:' + escapeHtml(contacts.email) + '">메일 보내기</a>') +
+                      '<button type="button" class="btn btn-secondary" id="copy-email-btn" style="min-height:40px; padding:7px 15px; font-size:0.9rem;">주소 복사</button>' +
+                    '</div>' +
+                  '</div>' +
+
+                  '<div class="contact-card">' +
+                    '<div>' +
+                      '<div class="contact-label">LinkedIn</div>' +
+                      '<div class="contact-value">' + renderValueOrTodo(contacts.linkedin) + '</div>' +
+                    '</div>' +
+                    '<div class="contact-actions">' +
+                      (linkedinIsTodo ? '' : '<a class="btn btn-ghost" href="' + escapeHtml(contacts.linkedin) + '" target="_blank" rel="noopener noreferrer">방문 ↗</a>') +
+                    '</div>' +
+                  '</div>' +
+
+                  '<div class="contact-card">' +
+                    '<div>' +
+                      '<div class="contact-label">GitHub</div>' +
+                      '<div class="contact-value">' + renderValueOrTodo(contacts.github) + '</div>' +
+                    '</div>' +
+                    '<div class="contact-actions">' +
+                      (githubIsTodo ? '' : '<a class="btn btn-ghost" href="' + escapeHtml(contacts.github) + '" target="_blank" rel="noopener noreferrer">방문 ↗</a>') +
+                    '</div>' +
+                  '</div>' +
+
+                  '<div class="contact-card">' +
+                    '<div>' +
+                      '<div class="contact-label">팀 회의 및 협업 채널</div>' +
+                      '<div class="contact-value">' + renderValueOrTodo(contacts.other) + '</div>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>' +
+              '</section>' +
             '</div>' +
-            '<div class="skills-grid">' + skillsHtml + '</div>' +
-            (teamHtml ? '<div class="team-grid" aria-label="팀 구성 및 역할">' + teamHtml + '</div>' : '') +
-          '</section>' +
-
-          '<section class="section-block reveal" aria-labelledby="timeline-heading">' +
-            '<div class="section-header">' +
-              '<h2 id="timeline-heading" class="section-title">경력 · 추진 이력 타임라인</h2>' +
-              '<p class="section-subtitle">최신순 정리 · portfolio-data 수정 시 자동 반영</p>' +
-            '</div>' +
-            '<ul class="timeline-list">' + expHtml + '</ul>' +
-          '</section>' +
-
-          '<section id="contact-section" class="section-block reveal" aria-labelledby="contact-heading">' +
-            '<div class="section-header">' +
-              '<h2 id="contact-heading" class="section-title">연락 방법</h2>' +
-              '<p class="section-subtitle">협업 및 프로젝트 관련 문의 채널</p>' +
-            '</div>' +
-            '<div class="contact-grid">' +
-              '<div class="contact-card">' +
-                '<div>' +
-                  '<div class="contact-label">이메일 (Email)</div>' +
-                  '<div class="contact-value">' + renderValueOrTodo(contacts.email) + '</div>' +
-                '</div>' +
-                '<div class="contact-actions">' +
-                  (emailIsTodo ? '' : '<a class="btn btn-ghost" href="mailto:' + escapeHtml(contacts.email) + '">메일 보내기</a>') +
-                  '<button type="button" class="btn btn-secondary" id="copy-email-btn" style="min-height:36px; padding:6px 14px; font-size:0.84rem;">주소 복사</button>' +
-                '</div>' +
-              '</div>' +
-
-              '<div class="contact-card">' +
-                '<div>' +
-                  '<div class="contact-label">LinkedIn</div>' +
-                  '<div class="contact-value">' + renderValueOrTodo(contacts.linkedin) + '</div>' +
-                '</div>' +
-                '<div class="contact-actions">' +
-                  (linkedinIsTodo ? '' : '<a class="btn btn-ghost" href="' + escapeHtml(contacts.linkedin) + '" target="_blank" rel="noopener noreferrer">방문 ↗</a>') +
-                '</div>' +
-              '</div>' +
-
-              '<div class="contact-card">' +
-                '<div>' +
-                  '<div class="contact-label">GitHub</div>' +
-                  '<div class="contact-value">' + renderValueOrTodo(contacts.github) + '</div>' +
-                '</div>' +
-                '<div class="contact-actions">' +
-                  (githubIsTodo ? '' : '<a class="btn btn-ghost" href="' + escapeHtml(contacts.github) + '" target="_blank" rel="noopener noreferrer">방문 ↗</a>') +
-                '</div>' +
-              '</div>' +
-
-              '<div class="contact-card">' +
-                '<div>' +
-                  '<div class="contact-label">팀 회의 및 협업 채널</div>' +
-                  '<div class="contact-value">' + renderValueOrTodo(contacts.other) + '</div>' +
-                '</div>' +
-              '</div>' +
-            '</div>' +
-          '</section>';
+          '</div>';
 
         var scrollBtn = document.getElementById('scroll-to-contact-btn');
         if (scrollBtn) {
@@ -2533,17 +2782,25 @@
           return;
         }
 
+        var thumbThemes = ['', 'project-thumb-sun', 'project-thumb-sea', 'project-thumb-coral'];
+        var thumbSvgs = [SVG_ICONS.shell, SVG_ICONS.sun, SVG_ICONS.droplet, SVG_ICONS.starfish];
+
         grid.innerHTML = filtered.map(function (proj, idx) {
-          var tagsText = (proj.tags || []).join(' · ');
+          var tagsHtml = (proj.tags || []).map(function (t) {
+            return '<span class="tag-chip">' + escapeHtml(t) + '</span>';
+          }).join('');
           var numLabel = '0' + (idx + 1);
+          var themeClass = thumbThemes[idx % thumbThemes.length];
+          var decoSvg = '<div class="project-thumb-deco" aria-hidden="true">' + thumbSvgs[idx % thumbSvgs.length] + '</div>';
           var thumbHtml = proj.thumbnail
             ? '<img src="' + escapeHtml(proj.thumbnail) + '" alt="' + escapeHtml(proj.title) + ' 썸네일" loading="lazy" />'
-            : '<div class="project-thumb-index">' + numLabel + ' / ' + escapeHtml(proj.period || '') + '</div>' +
-              '<div class="project-thumb-caption">' + escapeHtml(proj.title) + '</div>';
+            : '<div class="project-thumb-index">' + numLabel + ' · ' + escapeHtml(proj.period || '') + '</div>' +
+              '<div class="project-thumb-caption">' + escapeHtml(proj.title) + '</div>' +
+              decoSvg;
 
           return (
             '<button type="button" class="project-card" data-project-id="' + escapeHtml(proj.id) + '">' +
-              '<div class="project-thumb ' + (proj.thumbnail ? '' : 'project-thumb-pattern') + '">' +
+              '<div class="project-thumb ' + (proj.thumbnail ? '' : themeClass) + '">' +
                 thumbHtml +
               '</div>' +
               '<div class="project-body">' +
@@ -2555,8 +2812,8 @@
                 '<h2 class="project-title">' + escapeHtml(proj.title) + '</h2>' +
                 '<p class="project-summary">' + escapeHtml(proj.summary) + '</p>' +
                 '<div class="project-footer-meta">' +
-                  '<span>' + escapeHtml(tagsText) + '</span>' +
-                  '<span>자세히 보기 →</span>' +
+                  '<div class="tag-list">' + tagsHtml + '</div>' +
+                  '<span class="project-more-label">자세히 보기 →</span>' +
                 '</div>' +
               '</div>' +
             '</button>'
@@ -2584,12 +2841,15 @@
 
         lastFocusedBeforeModal = document.activeElement;
 
+        var modalTags = (proj.tags || []).map(function (t) {
+          return '<span class="tag-chip tag-chip-sun">' + escapeHtml(t) + '</span>';
+        }).join('');
+
         metaEl.innerHTML =
           '<span>' + escapeHtml(proj.period || '') + '</span>' +
           '<span class="meta-sep" aria-hidden="true">·</span>' +
           '<span>' + escapeHtml(proj.role || '') + '</span>' +
-          '<span class="meta-sep" aria-hidden="true">·</span>' +
-          '<span>' + escapeHtml((proj.tags || []).join(' / ')) + '</span>';
+          '<div class="tag-list" style="margin-top:6px; width:100%;">' + modalTags + '</div>';
 
         titleEl.textContent = proj.title;
 
@@ -2727,7 +2987,7 @@
           ? '<ul class="neighbor-list">' + neighbors.map(function (nb) {
               return (
                 '<li><button type="button" class="neighbor-btn" data-neighbor-id="' + escapeHtml(nb.node.id) + '">' +
-                  '<span>' + escapeHtml(nb.node.displayName) + ' <span style="color:var(--color-ink-muted); font-size:0.78rem;">(' + escapeHtml(nb.node.primaryLabel) + ')</span></span>' +
+                  '<span>' + escapeHtml(nb.node.displayName) + ' <span style="color:var(--color-ink-muted); font-size:0.8rem;">(' + escapeHtml(nb.node.primaryLabel) + ')</span></span>' +
                   '<span class="neighbor-rel">' + escapeHtml(nb.rel) + '</span>' +
                 '</button></li>'
               );
@@ -2736,11 +2996,9 @@
 
         panel.innerHTML =
           '<div>' +
-            '<div class="meta-line" style="margin-bottom:6px;">' +
+            '<div class="tag-chip tag-chip-mint" style="margin-bottom:8px;">' +
               '<span class="legend-swatch" style="background:' + color + ';" aria-hidden="true"></span>' +
-              '<span>' + escapeHtml(node.labels.join(' · ')) + '</span>' +
-              '<span class="meta-sep" aria-hidden="true">/</span>' +
-              '<span class="tabular-nums">' + escapeHtml(node.id) + '</span>' +
+              '<span>' + escapeHtml(node.labels.join(' · ')) + ' · ' + escapeHtml(node.id) + '</span>' +
             '</div>' +
             '<h2 class="inspector-title">' + escapeHtml(node.displayName) + '</h2>' +
           '</div>' +
@@ -2784,30 +3042,30 @@
           if (!selectedNodeId) {
             updatedNodes.push({
               id: vn.id,
-              color: { background: baseColor, border: baseColor, highlight: { background: baseColor, border: '#18181B' } },
-              font: { color: '#18181B', size: 13, face: 'Pretendard, sans-serif' },
+              color: { background: baseColor, border: '#1F3B4D', highlight: { background: baseColor, border: '#1F3B4D' } },
+              font: { color: '#1F3B4D', size: 14, face: 'Gowun Dodum, sans-serif' },
               borderWidth: 2
             });
           } else if (vn.id === selectedNodeId) {
             updatedNodes.push({
               id: vn.id,
-              color: { background: baseColor, border: '#18181B', highlight: { background: baseColor, border: '#18181B' } },
-              font: { color: '#18181B', size: 15, bold: true, face: 'Pretendard, sans-serif' },
+              color: { background: baseColor, border: '#1F3B4D', highlight: { background: baseColor, border: '#1F3B4D' } },
+              font: { color: '#1F3B4D', size: 16, bold: true, face: 'Jua, sans-serif' },
               borderWidth: 4
             });
           } else if (neighborIds.has(vn.id)) {
             updatedNodes.push({
               id: vn.id,
-              color: { background: baseColor, border: '#18181B' },
-              font: { color: '#18181B', size: 13, face: 'Pretendard, sans-serif' },
+              color: { background: baseColor, border: '#1F3B4D' },
+              font: { color: '#1F3B4D', size: 14, face: 'Gowun Dodum, sans-serif' },
               borderWidth: 2.5
             });
           } else {
             updatedNodes.push({
               id: vn.id,
-              color: { background: '#E4E4E7', border: '#D4D4D8' },
-              font: { color: '#A1A1AA', size: 11, face: 'Pretendard, sans-serif' },
-              borderWidth: 1
+              color: { background: '#E2F1EE', border: '#BDE7E1' },
+              font: { color: '#7D9AA6', size: 12, face: 'Gowun Dodum, sans-serif' },
+              borderWidth: 1.5
             });
           }
         });
@@ -2818,23 +3076,23 @@
           if (!selectedNodeId) {
             updatedEdges.push({
               id: ve.id,
-              color: { color: 'rgba(24, 24, 27, 0.28)', highlight: '#7F1D3A' },
-              font: { color: '#52525B', size: 10, align: 'middle', strokeWidth: 3, strokeColor: '#FFFFFF' },
-              width: 1.2
+              color: { color: '#7CCBC0', highlight: '#1F3B4D' },
+              font: { color: '#4A6272', size: 10, align: 'middle', strokeWidth: 3, strokeColor: '#F2FBF8' },
+              width: 1.5
             });
           } else if (ve.from === selectedNodeId || ve.to === selectedNodeId) {
             updatedEdges.push({
               id: ve.id,
-              color: { color: '#7F1D3A', highlight: '#7F1D3A' },
-              font: { color: '#18181B', size: 11, align: 'middle', strokeWidth: 3, strokeColor: '#FFFFFF' },
-              width: 2.4
+              color: { color: '#1F3B4D', highlight: '#1F3B4D' },
+              font: { color: '#1F3B4D', size: 11, align: 'middle', strokeWidth: 3, strokeColor: '#F2FBF8' },
+              width: 2.6
             });
           } else {
             updatedEdges.push({
               id: ve.id,
-              color: { color: 'rgba(24, 24, 27, 0.08)' },
-              font: { color: 'rgba(82, 82, 91, 0.25)', size: 9, align: 'middle', strokeWidth: 0 },
-              width: 0.8
+              color: { color: '#D3ECE8' },
+              font: { color: '#9BB5BF', size: 9, align: 'middle', strokeWidth: 0 },
+              width: 1
             });
           }
         });
@@ -2866,9 +3124,9 @@
             id: n.id,
             label: n.displayName,
             shape: 'dot',
-            size: n.primaryLabel === 'Character' ? 19 : 16,
-            color: { background: color, border: color, highlight: { background: color, border: '#18181B' } },
-            font: { color: '#18181B', size: 13, face: 'Pretendard, sans-serif' },
+            size: n.primaryLabel === 'Character' ? 20 : 17,
+            color: { background: color, border: '#1F3B4D', highlight: { background: color, border: '#1F3B4D' } },
+            font: { color: '#1F3B4D', size: 14, face: 'Gowun Dodum, sans-serif' },
             borderWidth: 2
           };
         }));
@@ -2880,8 +3138,8 @@
             to: e.to,
             label: e.type,
             arrows: 'to',
-            color: { color: 'rgba(24, 24, 27, 0.28)', highlight: '#7F1D3A' },
-            font: { color: '#52525B', size: 10, align: 'middle', strokeWidth: 3, strokeColor: '#FFFFFF' }
+            color: { color: '#7CCBC0', highlight: '#1F3B4D' },
+            font: { color: '#4A6272', size: 10, align: 'middle', strokeWidth: 3, strokeColor: '#F2FBF8' }
           };
         }));
 
